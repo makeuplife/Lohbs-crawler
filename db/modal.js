@@ -29,6 +29,8 @@ var oliveYoungSchema = new Schema({
     all_components: String,
     is_safety: String,
     precautions: String,
+    reg_date: String,
+    update_date: String,
 });
 
 module.exports = oliveYoungSchema;
