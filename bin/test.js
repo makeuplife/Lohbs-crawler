@@ -6,14 +6,23 @@ const scheduler = require('../lib/scheduler')
 const dailyCollector = require('../lib/dailyCollector')
 const db = require('../db/db');
 
+// var re = /["productSalePrice"+]/;
+// var re = /[^"productSalePrice" :]*,/;
+// var re = /[||][0-9]+[||]/g;
+// var str = '\n\n\n\n\n\n<!DOCTYPE HTML>\n<html lang="kr">\n<head> "productSalePrice" : 13000.00, \n\n\n\n\n\n<!DOCTYPE HTML>\n<html lang="kr">\n<head>'
+//
+// var myArray = str2.split('"productSalePrice" : ')[1].split(',')[0];
+// var myArray2 = str2.split('"salePrice" : ')[1].split(',')[0];
+// console.log(myArray);
+// console.log(myArray2);
 /**
  * start crawler
  */
+let totalCount = 30;
+
 // dailyCollector.init()
 //     .then(result=> {
 //         let totalCount = result['totalCount'];
-//         console.log('totalCount=>', totalCount);
-//
 //         dailyCollector.run(totalCount)
 //     }).catch(err => {
 //         console.log('err=>', err)

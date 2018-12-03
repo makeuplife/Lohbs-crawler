@@ -4,7 +4,7 @@ var client  = mqtt.connect(config.mqtt.url);
 var scheduler = require('../lib/scheduler');
 
 client.on('connect', function () {
-    client.subscribe('makeuplife/OliveYoung');
+    client.subscribe('makeuplife/Lohbs');
     scheduler.DailyJob();
 });
 client.on('message', function (topic, message) {
