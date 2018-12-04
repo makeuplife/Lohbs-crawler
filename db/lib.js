@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var oliveYoungSchema = require('./modal');
+var lohbsSchema = require('./modal');
 
-module.exports = mongoose.model('OliveYoung', oliveYoungSchema);
+module.exports = mongoose.model('Lohbs', lohbsSchema);

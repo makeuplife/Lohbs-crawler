@@ -1,14 +1,14 @@
-var OliveYoung = require('./lib');
+var Lohbs = require('./lib');
 
-function createOliveYoung (data) {
+function createLohbs (data) {
     return new Promise((resolve, reject) => {
         console.log(data)
-        var oliveYoungs = new OliveYoung(data)
-        oliveYoungs.save(function (err, result) {
+        var lohbs = new Lohbs(data)
+        lohbs.save(function (err, result) {
             if (err) {
                 reject(err);
             } else {
-                console.log('createOliveYoung done: ' + result)
+                console.log('createLohbs done: ' + result)
                 resolve(result)
             }
         })
@@ -18,7 +18,7 @@ function createOliveYoung (data) {
 function insertBulk (data) {
     return new Promise((resolve, reject) => {
         // console.log(data)
-        OliveYoung.insertMany(data)
+        Lohbs.insertMany(data)
             .then((result) => {
                 console.log('result=>', result)
                 resolve(result)
@@ -30,17 +30,17 @@ function insertBulk (data) {
     })
 }
 
-function getOliveYoungAll () {
+function getLohbsAll () {
     return new Promise((resolve, reject) => {
-        OliveYoung.find(
+        Lohbs.find(
             {},
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                // console.log('getOliveYoungAll done: ' + oliveYoung)
-                resolve(oliveYoung)
+                // console.log('getLohbsAll done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
@@ -48,14 +48,14 @@ function getOliveYoungAll () {
 
 function getProductCodeList () {
     return new Promise((resolve, reject) => {
-        OliveYoung.find(
+        Lohbs.find(
             {},
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                let product_ref_code_list = oliveYoung.product_ref_code;
+                let product_ref_code_list = lohbs.product_ref_code;
                 console.log('getProductCodeList done: ' + product_ref_code_list)
                 resolve(product_ref_code_list)
             }
@@ -63,93 +63,93 @@ function getProductCodeList () {
     })
 }
 
-function getOliveYoungByName (oliveYoungName) {
+function getLohbsByName (lohbsName) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOne(
-            {"oliveYoung_name": oliveYoungName},
-            function(err, oliveYoung) {
+        Lohbs.findOne(
+            {"lohbs_name": lohbsName},
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('oliveYoungName done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('lohbsName done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
-function getByRegexOliveYoungName (oliveYoungName) {
+function getByRegexLohbsName (lohbsName) {
     return new Promise((resolve, reject) => {
-        OliveYoung.find(
-            {"oliveYoung_name": { $regex: oliveYoungName, $options: 'i' }},
-            function(err, oliveYoung) {
+        Lohbs.find(
+            {"lohbs_name": { $regex: lohbsName, $options: 'i' }},
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('oliveYoungName done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('lohbsName done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
-function getOliveYoungById (id) {
+function getLohbsById (id) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOne(
+        Lohbs.findOne(
             {"_id": id},
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('getOliveYoungById done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('getLohbsById done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
-function getOliveYoungByIdAndPassword (data) {
+function getLohbsByIdAndPassword (data) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOne(
+        Lohbs.findOne(
             {
-                "oliveYoungTag"        : data.oliveYoungTag,
+                "lohbsTag"        : data.lohbsTag,
                 "password"  : data.password
             },
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('getOliveYoungById done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('getLohbsById done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
-function getOliveYoungByEmail (email, body) {
+function getLohbsByEmail (email, body) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOne(
+        Lohbs.findOne(
             {"email": email},
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('getOliveYoungById done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('getLohbsById done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
-function updateOliveYoungById(oliveYoungId, body) {
+function updateLohbsById(lohbsId, body) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOneAndUpdate(
-            {"_id": oliveYoungId
+        Lohbs.findOneAndUpdate(
+            {"_id": lohbsId
             },
             {$set: body
             },
@@ -164,9 +164,9 @@ function updateOliveYoungById(oliveYoungId, body) {
     })
 }
 
-function updateOliveYoungByCode(product) {
+function updateLohbsByCode(product) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findOneAndUpdate(
+        Lohbs.findOneAndUpdate(
             {"product_ref_code": product.product_ref_code
             },
             {$set: product
@@ -182,12 +182,12 @@ function updateOliveYoungByCode(product) {
     })
 }
 
-function updateOliveYoungHistoryId(oliveYoungId, historyId) {
+function updateLohbsHistoryId(lohbsId, historyId) {
     return new Promise((resolve, reject) => {
 
-        OliveYoung.findOneAndUpdate(
+        Lohbs.findOneAndUpdate(
             {
-                "_id": oliveYoungId
+                "_id": lohbsId
             },
             {
                 $push: {historys: historyId}
@@ -203,32 +203,32 @@ function updateOliveYoungHistoryId(oliveYoungId, historyId) {
     })
 }
 
-function deleteOliveYoungById (id) {
+function deleteLohbsById (id) {
     return new Promise((resolve, reject) => {
-        OliveYoung.findByIdAndRemove(
+        Lohbs.findByIdAndRemove(
             id,
-            function(err, oliveYoung) {
+            function(err, lohbs) {
                 if (err) {
                     console.error(err)
                     reject(err)
                 }
-                console.log('getOliveYoungById done: ' + oliveYoung)
-                resolve(oliveYoung)
+                console.log('getLohbsById done: ' + lohbs)
+                resolve(lohbs)
             }
         )
     })
 }
 
 exports.insertBulk = insertBulk;
-exports.createOliveYoung = createOliveYoung;
-exports.getOliveYoungAll = getOliveYoungAll;
+exports.createLohbs = createLohbs;
+exports.getLohbsAll = getLohbsAll;
 exports.getProductCodeList = getProductCodeList;
-exports.getOliveYoungByName = getOliveYoungByName;
-exports.getByRegexOliveYoungName = getByRegexOliveYoungName;
-exports.getOliveYoungById = getOliveYoungById;
-exports.getOliveYoungByIdAndPassword = getOliveYoungByIdAndPassword;
-exports.getOliveYoungByEmail = getOliveYoungByEmail;
-exports.updateOliveYoungById = updateOliveYoungById;
-exports.updateOliveYoungByCode = updateOliveYoungByCode;
-exports.updateOliveYoungHistoryId = updateOliveYoungHistoryId;
-exports.deleteOliveYoungById = deleteOliveYoungById;
+exports.getLohbsByName = getLohbsByName;
+exports.getByRegexLohbsName = getByRegexLohbsName;
+exports.getLohbsById = getLohbsById;
+exports.getLohbsByIdAndPassword = getLohbsByIdAndPassword;
+exports.getLohbsByEmail = getLohbsByEmail;
+exports.updateLohbsById = updateLohbsById;
+exports.updateLohbsByCode = updateLohbsByCode;
+exports.updateLohbsHistoryId = updateLohbsHistoryId;
+exports.deleteLohbsById = deleteLohbsById;
