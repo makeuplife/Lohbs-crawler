@@ -5,6 +5,7 @@ const file = path.join(__dirname, fileName)
 const scheduler = require('../lib/scheduler')
 const dailyCollector = require('../lib/dailyCollector')
 const db = require('../db/db');
+var util = require('../utils/util');
 
 // var re = /["productSalePrice"+]/;
 // var re = /[^"productSalePrice" :]*,/;
@@ -31,12 +32,12 @@ let totalCount = 30;
 /**
  * insert mongodb
  **/
-// let OliveYoungService = require('../db/service');
+// let LohbsService = require('../db/service');
 // jsonfile.readFile(file)
 //     .then((items) => {
 //         db.connectDB()
 //             .then(() => {
-//                 OliveYoungService.insertBulk(items)
+//                 LohbsService.insertBulk(items)
 //                     .then(() =>{
 //                         db.close()
 //                     })
@@ -67,32 +68,36 @@ let totalCount = 30;
 /**
  * compare cache file product to db product
  **/
-// var dbManager = require('../lib/dbManager');
-// let file_products = jsonfile.readFileSync(file, 'utf8')
-// db.connectDB()
-//     .then(()=> {
-//         dbManager.getProductCodeList()
-//             .then(produtCodeList => {
-//
-//                 file_products.forEach(product => {
-//                     console.log('product.product_ref_code=>', product.product_ref_code)
-//                     if (produtCodeList.toString().includes(product.product_ref_code)) {
-//                         console.log('in includes!')
-//                         //update product
-//                         dbManager.updateProductByCode(product)
-//                             .then(result => {
-//                                 console.log('updateProductByCode result=>', result)
-//                             })
-//                     } else {
-//                         //insert product
-//                         dbManager.insertProduct(product)
-//                             .then(result=> {
-//                                 console.log('insertProduct result=>', result)
-//                             })
-//                     }
-//                 }).then(()=> {
-//                     console.log('end forEach!')
-//                     db.close();
-//                 })
-//             })
-//     })
+var dbManager = require('../lib/dbManager');
+let file_products = jsonfile.readFileSync(file, 'utf8')
+db.connectDB()
+    .then(()=> {
+        dbManager.getProductCodeList()
+            .then(produtCodeList => {
+
+                file_products.forEach(product => {
+                    console.log('product.product_ref_code=>', product.product_ref_code)
+                    if (produtCodeList.toString().includes(product.product_ref_code)) {
+                        console.log('in includes!')
+
+                        product['update_date'] = util.formatDate(new Date().toLocaleString('ko-KR'))
+                        //update product
+                        dbManager.updateProductByCode(product)
+                            .then(result => {
+                                console.log('updateProductByCode result=>', result)
+                            })
+                    } else {
+
+                        product['reg_date'] = util.formatDate(new Date().toLocaleString('ko-KR'))
+                        //insert product
+                        dbManager.insertProduct(product)
+                            .then(result=> {
+                                console.log('insertProduct result=>', result)
+                            })
+                    }
+                }).then(()=> {
+                    console.log('end forEach!')
+                    db.close();
+                })
+            })
+    })
