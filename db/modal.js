@@ -16,6 +16,7 @@ var oliveYoungSchema = new Schema({
     duration_coupon_start: String,
     duration_coupon_end: String,
     percent: Number,
+    site: String,                   //crawler의 대상 사이트
     tags: [String],                 //상품에 달린 태그
     categorys: [String],            //카테고리 루트
     product_img: String,            //상품 이미지
