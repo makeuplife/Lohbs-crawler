@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var oliveYoungSchema = new Schema({
+var lohbsSchema = new Schema({
     product_ref_code: String,
     brand: String,
     title: String,
@@ -34,4 +34,4 @@ var oliveYoungSchema = new Schema({
     update_date: String,            //상품 업데이트 날짜
 });
 
-module.exports = oliveYoungSchema;
+module.exports = lohbsSchema;
